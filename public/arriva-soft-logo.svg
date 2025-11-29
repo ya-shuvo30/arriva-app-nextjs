@@ -1,0 +1,34 @@
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left icon with brackets and flowing lines -->
+  <g transform="translate(20, 60)">
+    <!-- Left bracket elements -->
+    <rect x="0" y="10" width="6" height="12" fill="#3B82F6" rx="2"/>
+    <rect x="0" y="35" width="6" height="30" fill="#3B82F6" rx="2"/>
+    <rect x="0" y="78" width="6" height="30" fill="#3B82F6" rx="2"/>
+    
+    <!-- Curved connector -->
+    <path d="M 12 18 Q 35 18, 35 45" stroke="#3B82F6" stroke-width="6" fill="none" stroke-linecap="round"/>
+    
+    <!-- Horizontal flowing lines -->
+    <line x1="45" y1="15" x2="90" y2="15" stroke="#3B82F6" stroke-width="6" stroke-linecap="round"/>
+    <line x1="45" y1="35" x2="90" y2="35" stroke="#3B82F6" stroke-width="6" stroke-linecap="round"/>
+    <line x1="45" y1="55" x2="90" y2="55" stroke="#3B82F6" stroke-width="6" stroke-linecap="round"/>
+    <line x1="45" y1="75" x2="90" y2="75" stroke="#3B82F6" stroke-width="6" stroke-linecap="round"/>
+    
+    <!-- Top arrow -->
+    <polygon points="88,10 95,15 88,20" fill="#3B82F6"/>
+  </g>
+  
+  <!-- Arriva text -->
+  <text x="140" y="115" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#1F2937">
+    Arriva
+  </text>
+  
+  <!-- Soft text -->
+  <text x="310" y="115" font-family="Arial, sans-serif" font-size="52" font-weight="400" fill="#3B82F6">
+    Soft
+  </text>
+  
+  <!-- Underline -->
+  <line x1="140" y1="125" x2="430" y2="125" stroke="#3B82F6" stroke-width="2"/>
+</svg>
