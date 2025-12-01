@@ -76,10 +76,37 @@ Arriva-App-Frontend-Typescript/
 
 ## 📋 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
+- `npm run dev` - Start development server (http://localhost:3000)
+- `npm run build` - Build for production (outputs to `/out` folder)
+- `npm run start` - Start production server (not used for static export)
 - `npm run lint` - Run ESLint
+
+## 🚀 Deployment
+
+This project is configured for automatic deployment to GitHub Pages with custom domain support.
+
+### Quick Deployment Steps
+
+1. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Deploy to GitHub Pages"
+   git push origin main
+   ```
+
+2. **Configure Custom Domain:**
+   - Edit `public/CNAME` with your domain
+   - Configure DNS in Namecheap (see `DEPLOYMENT.md`)
+
+3. **Enable GitHub Pages:**
+   - Go to repository **Settings** → **Pages**
+   - Set source to **GitHub Actions**
+
+📖 **Full deployment guide:** See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for complete instructions.
+
+### Deployment Status
+
+Check deployment status: [GitHub Actions](https://github.com/ya-shuvo30/arriva-app-nextjs/actions)
 
 ## 🎨 Key Components
 

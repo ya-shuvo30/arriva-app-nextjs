@@ -1,21 +1,23 @@
 # Arriva Soft Frontend - AI Coding Agent Instructions
 
 ## Project Overview
-React 18 + TypeScript + Vite SPA showcasing Arriva Soft's multi-industry software development services. Single-file data architecture with auto-rotating hero carousels and industry-specific dashboards.
+Next.js 14 (App Router) + TypeScript + Tailwind CSS static site showcasing Arriva Soft's multi-industry software development services. Single-file data architecture with auto-rotating hero carousels and industry-specific dashboards.
+
+**Critical**: This is a **Next.js static export** (`output: 'export'` in `next.config.js`), not a Vite SPA. All components use `'use client'` directive due to state/effects.
 
 ## Critical Architecture Patterns
 
-### Single Source of Truth: `src/data.ts`
-**All content lives in one file.** Never hardcode content in components—always import from `data.ts`:
+### Single Source of Truth: `data.ts` (root level)
+**All content lives in one file.** Never hardcode content in components—always import from `@/data`:
 - `NAV_LINKS` - Header navigation with mega-menu structure
-- `HERO_SLIDES` - 5 industry-specific hero slides (auto-rotate every 8s in App.tsx)
-- `EVENT_BANNERS` - Conditional banners (filtered by `isActive` in App.tsx)
+- `HERO_SLIDES` - 5 industry-specific hero slides (auto-rotate every 8s in page.tsx)
+- `EVENT_BANNERS` - Conditional banners (filtered by `isActive` in page.tsx)
 - `servicesData`, `industriesData`, `techStackData` - Section content
 - `fintechDashboardData`, `healthcareDashboardData`, etc. - Dashboard variants (auto-rotate every 5s in DashboardCarousel)
 
 **Example**: To add a new service, modify `servicesData` array in `data.ts`—never edit ServicesGrid.tsx.
 
-### Type-First Development: `src/types.ts`
+### Type-First Development: `types.ts` (root level)
 All interfaces are centralized. When adding features:
 1. Define the interface in `types.ts` (e.g., `Service`, `DashboardData`)
 2. Add data to `data.ts` conforming to the interface
@@ -23,9 +25,27 @@ All interfaces are centralized. When adding features:
 
 **Key interfaces**: `NavLink` (nested subLinks), `DashboardData` (dynamic metrics/timeline), `HeroContent` (carousel slides)
 
+### Next.js App Router Structure
+```
+app/
+├── layout.tsx (root layout, metadata, no client state)
+├── page.tsx (Home component - client component with state)
+└── globals.css (Tailwind directives + custom scrollbar)
+
+components/ (all client components)
+├── Header.tsx ('use client' - has useState for menu)
+├── DashboardCarousel.tsx ('use client' - has auto-rotation state)
+└── [other components].tsx (stateless, but bundled as client)
+
+data.ts (root) - All content arrays
+types.ts (root) - All TypeScript interfaces
+```
+
+**Import pattern**: Use `@/` alias (e.g., `import { HERO_SLIDES } from "@/data"`, `import Header from "@/components/Header"`)
+
 ### Component Composition Hierarchy
 ```
-App.tsx (state owner)
+page.tsx (Home - state owner, 'use client')
 ├── EventBannerComponent (filtered by isActive)
 ├── Header (mega-menu with DropdownItem children)
 ├── Hero (receives slide via props, uses DashboardCarousel)
@@ -37,30 +57,36 @@ App.tsx (state owner)
 └── Footer (maps FOOTER_LINKS)
 ```
 
-**State management**: `currentSlideIndex` (hero carousel) lives in App.tsx and passes down to Hero via `onSlideChange` callback. Dashboard carousel state is self-contained in DashboardCarousel.tsx.
+**State management**: `currentSlideIndex` (hero carousel) lives in `page.tsx` and passes down to Hero via `onSlideChange` callback. Dashboard carousel state is self-contained in DashboardCarousel.tsx.
 
 ## Critical Developer Workflows
 
 ### Development Commands
 ```powershell
-npm run dev          # Vite dev server at localhost:5173 with HMR
-npm run build        # TypeScript compilation (tsc) + Vite production build
-npm run preview      # Preview production build locally
-npm run lint         # ESLint with TypeScript rules
+npm run dev          # Next.js dev server at localhost:3000 with Fast Refresh
+npm run build        # Next.js static export (generates /out folder)
+npm run start        # Serves production build (not applicable for static export)
+npm run lint         # Next.js ESLint with TypeScript rules
 ```
 
-**Build process**: Always runs `tsc && vite build`. TypeScript errors block builds—check `tsconfig.json` for strict mode settings.
+**Build process**: Runs `next build` which compiles TypeScript and generates static HTML/CSS/JS in `/out`. TypeScript errors block builds—check `tsconfig.json` for strict mode settings.
+
+**Static Export**: Site builds to static files (no server required). Deploy `/out` folder to any static host.
+
+**CI/CD Pipeline**: Automated deployment to GitHub Pages via GitHub Actions. Triggered on push to `main` or manual dispatch. See `.github/workflows/deploy.yml`.
 
 ### Adding New Content (Most Common Task)
 1. **New hero slide**: Add to `HERO_SLIDES` in `data.ts` → auto-appears in carousel
 2. **New service/industry**: Add to respective array in `data.ts` → grid updates automatically
 3. **Toggle event banner**: Set `isActive: true/false` in `EVENT_BANNERS`
-4. **New dashboard variant**: Create `DashboardData` object in `data.ts`, add to `dashboards` array in DashboardCarousel.tsx
+4. **New dashboard variant**: Create `DashboardData` object in `data.ts`, add to `dashboards` array in `DashboardCarousel.tsx`
+5. **Update metadata**: Edit `app/layout.tsx` (title, description, keywords)
 
 ### Modifying Components
 - **Never** hardcode colors—use Tailwind classes (see `tailwind.config.js` for custom animations)
 - Icon imports: Use `lucide-react` (already imported in data.ts: `Code, Users, Heart, DollarSign`, etc.)
 - Responsive breakpoints: `sm:` (640px), `md:` (768px), `lg:` (1024px), `xl:` (1280px), `2xl:` (1536px)
+- **Client components**: Add `'use client'` directive only if component uses hooks (useState, useEffect) or browser APIs
 
 ## Project-Specific Conventions
 
@@ -71,16 +97,16 @@ npm run lint         # ESLint with TypeScript rules
 - **Spacing**: Section padding `py-16 md:py-24`, card gaps `gap-6 lg:gap-8`
 
 ### Component Patterns
-1. **Auto-rotating carousels**: Use `useEffect` with `setInterval` + cleanup (see Hero.tsx line 14, DashboardCarousel.tsx line 18)
-2. **Conditional rendering**: `{EVENT_BANNERS.filter(b => b.isActive).map(...)}` (App.tsx line 28)
-3. **Prop callbacks**: `onSlideChange` pattern for parent-child state sync (Hero.tsx receives, App.tsx owns)
+1. **Auto-rotating carousels**: Use `useEffect` with `setInterval` + cleanup (see page.tsx line 16, DashboardCarousel.tsx line 22)
+2. **Conditional rendering**: `{EVENT_BANNERS.filter(b => b.isActive).map(...)}` (page.tsx line 34)
+3. **Prop callbacks**: `onSlideChange` pattern for parent-child state sync (Hero.tsx receives, page.tsx owns)
 4. **Dynamic data rendering**: `ProjectOrderDashboard` accepts `DashboardData` prop to render different industry dashboards
 
 ### File Organization
-- **Components**: One per file in `src/components/`, default export, typed with `React.FC`
-- **Data**: All in `src/data.ts`, exported as named constants (UPPERCASE_WITH_UNDERSCORES)
-- **Types**: All in `src/types.ts`, exported interfaces (PascalCase)
-- **Global styles**: `src/index.css` (Tailwind directives + custom scrollbar in lines 13-28)
+- **Components**: One per file in `components/`, default export, typed with `React.FC`
+- **Data**: All in `data.ts` (root level), exported as named constants (UPPERCASE_WITH_UNDERSCORES)
+- **Types**: All in `types.ts` (root level), exported interfaces (PascalCase)
+- **Global styles**: `app/globals.css` (Tailwind directives + custom scrollbar)
 
 ## Integration Points
 
@@ -104,14 +130,22 @@ npm run lint         # ESLint with TypeScript rules
 ## Quick Reference
 
 **Most edited files** (in order of frequency):
-1. `src/data.ts` - Content updates
-2. `src/components/*.tsx` - UI tweaks
+1. `data.ts` - Content updates
+2. `components/*.tsx` - UI tweaks
 3. `tailwind.config.js` - Design token changes
-4. `src/types.ts` - New data structures
+4. `types.ts` - New data structures
 
 **Key files for understanding architecture**:
 - `ARCHITECTURE.md` - Complete component hierarchy and data flow diagrams
 - `TRANSFORMATION_SUMMARY.md` - Recent changes from fintech-only to multi-industry site
 - `README.md` - Installation and feature documentation
+- `DEPLOYMENT.md` - Complete GitHub Pages deployment guide with custom domain setup
+- `.github/DEPLOYMENT_CHECKLIST.md` - Step-by-step deployment checklist
 
-**Never modify**: `package-lock.json`, `dist/` folder, `node_modules/`
+**Key deployment files**:
+- `public/CNAME` - Custom domain configuration (edit with your domain)
+- `public/.nojekyll` - Prevents Jekyll processing on GitHub Pages
+- `.github/workflows/deploy.yml` - CI/CD pipeline configuration
+- `next.config.js` - Next.js build and export settings
+
+**Never modify**: `package-lock.json`, `out/` folder, `node_modules/`, `.next/` folder

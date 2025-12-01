@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { NAV_LINKS } from "@/data";
 import type { NavLink } from "@/types";
@@ -41,10 +42,13 @@ const Header: React.FC = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-blue-500 rounded-lg blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"></div>
               <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
-                <img
+                <Image
                   src="/app-icon.svg"
                   alt="Arriva Soft Icon"
+                  width={96}
+                  height={96}
                   className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-xl"
+                  priority
                 />
               </div>
             </div>
