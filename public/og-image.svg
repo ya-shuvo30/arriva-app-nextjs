@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grad)"/>
+  <text x="600" y="250" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Arriva Soft</text>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" opacity="0.9">Transform Your Business with Custom Software</text>
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle" opacity="0.8">23+ Years | 200+ Projects | 98% Client Satisfaction</text>
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#fbbf24" text-anchor="middle">www.arrivasofts.com</text>
+</svg>
