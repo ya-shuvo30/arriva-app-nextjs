@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import {
   DollarSign,
@@ -20,6 +22,12 @@ interface ProjectOrderDashboardProps {
 const ProjectOrderDashboard: React.FC<ProjectOrderDashboardProps> = ({
   data,
 }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Icon mapping
   const iconMap: { [key: string]: React.ReactNode } = {
     dollar: <DollarSign className="w-4 h-4" />,
@@ -47,7 +55,7 @@ const ProjectOrderDashboard: React.FC<ProjectOrderDashboardProps> = ({
   }));
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-blue-50 to-sky-100 rounded-xl p-4 md:p-6">
+    <div className="w-full h-full min-h-[420px] min-w-[280px] bg-gradient-to-br from-blue-50 to-sky-100 rounded-xl p-4 md:p-6">
       <div className="space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -61,24 +69,33 @@ const ProjectOrderDashboard: React.FC<ProjectOrderDashboardProps> = ({
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex flex-col md:flex-row items-center gap-4">
             {/* Chart */}
-            <div className="relative w-32 h-32 md:w-36 md:h-36">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={chartData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={35}
-                    outerRadius={55}
-                    paddingAngle={2}
-                    dataKey="value"
-                  >
-                    {chartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
+            <div className="relative w-32 h-32 md:w-36 md:h-36 min-w-[128px] min-h-[128px]">
+              {isClient ? (
+                <ResponsiveContainer
+                  width="100%"
+                  height="100%"
+                  minHeight={128}
+                  minWidth={128}
+                >
+                  <PieChart>
+                    <Pie
+                      data={chartData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={35}
+                      outerRadius={55}
+                      paddingAngle={2}
+                      dataKey="value"
+                    >
+                      {chartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="w-full h-full rounded-full bg-slate-100 animate-pulse" />
+              )}
               {/* Center Total */}
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-2xl md:text-3xl font-bold text-gray-900">
