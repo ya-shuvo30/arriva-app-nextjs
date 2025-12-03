@@ -6,30 +6,35 @@ import Footer from "@/components/Footer";
 import { SERVICES_DATA } from "@/data";
 
 export const metadata: Metadata = {
-  title: 'Our Services | Arriva Soft',
-  description: 'Explore our comprehensive software development services, including custom software, dedicated teams, AI & Data Science, and more. We are the software builder firm that delivers excellence.',
+  title: 'Software Development Services | Web & App Development | Arriva Soft',
+  description: 'Explore Arriva Soft\'s comprehensive software development services: custom software development, web application development, mobile app development, AI solutions, cloud & DevOps, and dedicated development teams. Get a free consultation today.',
   keywords: [
-    'custom software development services',
-    'dedicated development team',
-    'technology consulting',
-    'AI and data science',
-    'UX/UI design services',
+    'software development services',
+    'custom software development',
+    'web application development',
+    'web development services',
+    'mobile app development',
+    'app development services',
+    'AI development services',
     'cloud and devops solutions',
+    'dedicated development team',
+    'software outsourcing',
     'enterprise software services',
-    'software builder firm',
+    'UX/UI design services',
+    'technology consulting',
     'Arriva Soft services',
   ],
   alternates: {
     canonical: '/services',
   },
   openGraph: {
-    title: 'Our Services | Arriva Soft',
-    description: 'From custom development to dedicated teams, explore the services that make us a leading software builder firm.',
+    title: 'Software Development Services | Web & App Development | Arriva Soft',
+    description: 'Full-stack software development services including web development, mobile app development, AI solutions, and dedicated teams. ISO 27001 certified.',
     url: '/services',
   },
   twitter: {
-    title: 'Our Services | Arriva Soft',
-    description: 'Comprehensive software development solutions to transform your business.',
+    title: 'Software Development Services | Arriva Soft',
+    description: 'Comprehensive software development services: web apps, mobile apps, AI, cloud solutions. 23+ years experience.',
   },
 };
 
@@ -43,12 +48,14 @@ export default function ServicesPage() {
         <section className="py-16 md:py-24 bg-gradient-to-br from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-6 md:px-8">
             <div className="text-center max-w-4xl mx-auto">
+              <span className="inline-block px-4 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">
+                Software Development Services
+              </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Our Services
+                Custom Software Development &amp; Web Application Services
               </h1>
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-                Comprehensive software development solutions designed to transform your business. 
-                From custom development to dedicated teams, we deliver excellence at every stage.
+                <strong>Arriva Soft</strong> offers comprehensive <strong>software development services</strong> including <strong>web development</strong>, <strong>mobile app development</strong>, <strong>AI solutions</strong>, and dedicated development teams. Transform your business with our ISO 27001 certified solutions.
               </p>
             </div>
           </div>

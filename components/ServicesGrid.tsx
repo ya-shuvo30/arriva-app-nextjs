@@ -6,14 +6,16 @@ const ServicesGrid: React.FC = () => {
   return (
     <section id="services" className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        {/* Section Header */}
+        {/* Section Header - SEO Optimized */}
         <div className="text-center mb-12 md:mb-16">
+          <span className="inline-block px-4 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">
+            Software Development Services
+          </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Our Services
+            Custom Software Development &amp; AI Solutions
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            End-to-end software development solutions tailored to your business
-            needs
+            As a leading <strong>software development agency</strong>, we deliver end-to-end <strong>web application development</strong>, <strong>mobile app development</strong>, and cutting-edge <strong>AI agent products</strong> tailored to your business needs.
           </p>
         </div>
 
@@ -51,11 +53,11 @@ const ServicesGrid: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA - SEO Optimized */}
         <div className="text-center mt-12 md:mt-16">
-          <p className="text-gray-600 mb-6">
-            Need a custom solution? Let&apos;s discuss your project
-            requirements.
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Looking for a trusted <strong>software builder firm</strong> to bring your vision to life? 
+            Our expert developers specialize in <strong>custom software development</strong>, <strong>web development</strong>, and <strong>AI solutions</strong>.
           </p>
           <a
             href="/contact"

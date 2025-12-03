@@ -8,6 +8,7 @@ import Hero from "@/components/Hero";
 import ServicesGrid from "@/components/ServicesGrid";
 import IndustriesSection from "@/components/IndustriesSection";
 import TechStack from "@/components/TechStack";
+import SEOContentSection from "@/components/SEOContentSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -50,6 +51,9 @@ export default function Home() {
 
         {/* Technology Stack */}
         <TechStack />
+
+        {/* SEO Content Sections */}
+        <SEOContentSection />
       </main>
 
       {/* Footer */}

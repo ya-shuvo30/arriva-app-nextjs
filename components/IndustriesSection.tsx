@@ -6,14 +6,16 @@ const IndustriesSection: React.FC = () => {
   return (
     <section id="industries" className="py-16 md:py-24 bg-white scroll-mt-20">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        {/* Section Header */}
+        {/* Section Header - SEO Optimized */}
         <div className="text-center mb-12 md:mb-16">
+          <span className="inline-block px-4 py-1 bg-purple-100 text-purple-700 text-sm font-semibold rounded-full mb-4">
+            Industry Expertise
+          </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Industries We Serve
+            Software Development for Every Industry
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Proven expertise across multiple sectors with hundreds of successful
-            projects delivered
+            From <strong>Fintech software development</strong> to <strong>Healthcare apps</strong> and <strong>E-commerce platforms</strong>—our <strong>software builder firm</strong> delivers industry-specific solutions with proven expertise across 200+ successful projects.
           </p>
         </div>
 
