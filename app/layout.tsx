@@ -66,8 +66,13 @@ export const metadata: Metadata = {
     canonical: 'https://www.arrivasofts.com',
   },
   icons: {
-    icon: '/app-icon.svg',
-    shortcut: '/app-icon.svg',
+    icon: [
+      { url: '/app-icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico',
     apple: '/app-icon.svg',
   },
 }
